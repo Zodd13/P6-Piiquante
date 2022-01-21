@@ -3,7 +3,6 @@ const fs = require('fs');
 
 // Création des sauces.
 exports.createSauce = (req,res,next) => {
-    console.log(req.body);
     const sauceObject = JSON.parse(req.body.sauce)
     const sauce = new Sauce({
         ...sauceObject,
