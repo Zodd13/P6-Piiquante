@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // Importation helmet.
 const helmet = require('helmet');
+// DOTENV pour gérer les variables d'environnements.
+require('dotenv').config();
 // Importation router.
 const sauceRoutes = require('./routes/sauce');
 // Importation router user.
@@ -15,7 +17,7 @@ const path = require('path');
 
 
 // Connexion à la base de données.
-mongoose.connect('mongodb+srv://Zodd13:test123@cluster0.y4e8x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.y4e8x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

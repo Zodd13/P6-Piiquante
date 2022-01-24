@@ -1,5 +1,4 @@
 const Sauce = require('../models/Sauce');
-const fs = require('fs');
 
 exports.likeSauce = (req,res,next) => {
     Sauce.findOne({ _id: req.params.id })
@@ -46,7 +45,7 @@ exports.likeSauce = (req,res,next) => {
             .catch();
         }
         else{
-            console.log(false)
+            return false;
         }
     })
     .catch((error) => res.status(404).json({error: error}));
