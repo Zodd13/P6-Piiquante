@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // Importation mongoose.
 const mongoose = require('mongoose');
+// Importation helmet.
+const helmet = require('helmet');
 // Importation router.
 const sauceRoutes = require('./routes/sauce');
 // Importation router user.
@@ -20,8 +22,9 @@ mongoose.connect('mongodb+srv://Zodd13:test123@cluster0.y4e8x.mongodb.net/myFirs
   .catch(() => console.log('Connexion à MongoDB échouée !'
 ));
 
-// Appel de express.
+// Appel de express et de helmet.
 const app = express();
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
