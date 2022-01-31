@@ -3,11 +3,13 @@ const Sauce = require('../models/Sauce');
 exports.likeSauce = (req,res,next) => {
     Sauce.findOne({ _id: req.params.id })
     .then((salsa) => {
-        // Si userId n'est  pas dans base de donnée et like à 1.
+        // Si user ID n'est  pas présent dans le tableau (!includes) et like = 1, incrémente 1 et on ajoute l'userLiked.
         if(!salsa.usersLiked.includes(req.body.userId) && req.body.like === 1) {
             Sauce.updateOne({ _id: req.params.id },
             {
+                // Incremente 1 à la BDD sur LIKES
                 $inc: {likes:1},
+                // PUSH usersLiked à la BDD 
                 $push: {usersLiked: req.body.userId}
             }
             )
